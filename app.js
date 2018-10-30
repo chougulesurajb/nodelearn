@@ -10,18 +10,20 @@ const notes = require('./notes.js');
 const path = require("path");
 
 const routeTest = require('./routes');
+const frontEnd = require('./frontEnd');
 
 const app = express();
 const port = process.env.PORT || 3001
 
 app.set('view engine', 'html');
 
-app.get('/', function (req, res) {
-    console.log("Path", path.join(__dirname + '/app/public/index.html'));
-    res.sendFile(path.join(__dirname + '/app/public/index.html'));
-});
+// app.get('/', function (req, res) {
+//     console.log("Path", path.join(__dirname + '/app/public/index.html'));
+//     res.sendFile(path.join(__dirname + '/app/public/index.html'));
+// });
 app.get('/about', (req, res) => res.send('i am Soft dev'))
 app.use('/test', routeTest);
+app.use('/', frontEnd);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 // const user = os.userInfo();
