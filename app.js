@@ -22,7 +22,7 @@ app.set('view engine', 'html');
 //     res.sendFile(path.join(__dirname + '/app/public/index.html'));
 // });
 app.get('/about', (req, res) => res.send('i am Soft dev'))
-app.use('/test', routeTest);
+app.use('/app', routeTest);
 app.use('/', frontEnd);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

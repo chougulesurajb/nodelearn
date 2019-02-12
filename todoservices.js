@@ -6,7 +6,7 @@ const app = express()
 const router = express.Router();
 var db = require('./helpers/db');
 var h = require('./helpers');
-var addNote = require('./addNote');
+var addNote = require('./operations');
 var _ = require('lodash');
 
 // MongoClient.connect('mongodb://localhost:27017/test', (er, db) => {
@@ -43,7 +43,7 @@ router.use('/', function (req, res, next) {
 router.get('/', (req, res) => {
     res.send("this is test route")
 })
-router.put('/', (req, res) => {
+router.put('/addnewtodo', (req, res) => {
     var note = addNote(req.body);
     note
         .insert()
@@ -55,8 +55,21 @@ router.put('/', (req, res) => {
         });
 
     // res.send("note")
+});
+router.put('/deletetodo', (req, res) => {
+    var note = deleteNote(req.body);
+    note
+        .remove()
+        .then(function (obj) {
+            console.log(obj.data._id);
+            return h.reply(res, { "success": "note deletetodo successfully " + obj.data._id });
+        }).catch(function (err) {
+            return h.reply(res, { "error": err });
+        });
+
+    // res.send("note")
 })
-router.get('/todos', (req, res) => {
+router.get('/getalltodos', (req, res) => {
     var user = db.collection('todolist');
     var allUsers = [];
     user

@@ -13,7 +13,6 @@ class App extends Component {
       <div className="">
         <ToDoApp />
         <Alert position='top-right' stack={{ limit: 3 }} />
-
       </div>
     );
   }

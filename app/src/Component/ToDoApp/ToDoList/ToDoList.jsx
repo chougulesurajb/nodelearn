@@ -33,7 +33,7 @@ class ToDoList extends Component {
         // var that = this;
         console.log(deleteTodo)
         $.ajax({
-            url: "https://vast-badlands-53032.herokuapp.com/test/user/todos",
+            url: "https://vast-badlands-53032.herokuapp.com/app/todoservices/deletetodo",
             method: "PUT",
             dataType: 'json',
             data: deleteTodo,
