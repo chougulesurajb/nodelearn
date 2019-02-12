@@ -12,7 +12,7 @@
     "react-alert": "^4.0.4",
     "react-dom": "^16.6.0",
     "react-s-alert": "^1.4.1",
-    "react-scripts": "2.0.5"
+    "react-scripts": "^2.1.5"
   },
   "scripts": {
     "start": "react-scripts start",

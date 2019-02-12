@@ -11,50 +11,71 @@ class ToDoList extends Component {
         };
     }
     componentDidMount() {
-        console.log(this.props.existingTodos)
-        this.setState({ existingTodos: this.props.existingTodos })
+        var that = this;
+
+        $.ajax({
+            url: "https://vast-badlands-53032.herokuapp.com/test/user/todos",
+            method: "GET",
+            dataType: 'json',
+            success: function (result) {
+                // this.state.names = result.allUsers;
+                // that.setState({ allTodos: result.allUsers }, function () {
+                // })
+                that.setState({ existingTodos: result.allUsers })
+            },
+            error: function (e) {
+                alert(e.message);
+            }
+        });
     }
-    onClickToDo = (e) => {
-        console.log(e.target.textContent)
-        this.props.clickToDo(e.target.textContent);
+
+    handleDeleteToDo = (deleteTodo) => {
+        // var that = this;
+        console.log(deleteTodo)
+        $.ajax({
+            url: "https://vast-badlands-53032.herokuapp.com/test/user/todos",
+            method: "PUT",
+            dataType: 'json',
+            data: deleteTodo,
+            success: function (result) {
+                // this.state.names = result.allUsers;
+                console.log("TODO deleted successfully")
+            },
+            error: function (e) {
+                alert("not deleted");
+            }
+        });
     }
     render() {
-        console.log(this.props.existingTodos)
+        console.log(this.state.existingTodos)
         var existingTodoList;
-        if (this.props.existingTodos) {
-            existingTodoList = this.props.existingTodos.map((todo, index) => {
-                return <ToDoSingle
+        if (this.state.existingTodos) {
+            existingTodoList = this.state.existingTodos.map((todo, index) => {
+                return <ToDoSingle onClick key={"ToDoSingle" + todo._id}
                     todoSingle={todo.todo}
-                    keyTodo={"keyTodoExisting" + index}
-                    onClickToDo={this.onClickToDo}
-                    indexTodo={index} />
-
+                    keyTodo={todo._id}
+                    indexTodo={index}
+                    handleDeleteToDo={this.handleDeleteToDo}
+                />
             })
         }
 
-        var todolist = this.props.toDoListProps.map((todo, index) => {
-            return <ToDoSingle
-                todoSingle={todo}
-                keyTodo={"keyTodo" + index}
-                onClickToDo={this.onClickToDo}
-                indexTodo={index} />
-        })
-
-        return <div>
-            <table id="toDoListTable">
-                <thead>
-                    <tr className="row">
-                        <th className="col-1">Sr</th>
-                        <td className="col-1">|</td>
-                        <th className="col-7">To Do</th>
-                        <td className="col-1">|</td>
-                        <th className="col-1">Delete</th>
-                    </tr>
-                </thead>
-                {existingTodoList}
-                {todolist}
-            </table>
-        </div>
+        return (
+            this.state.existingTodos.length !== 0 ? <div>
+                <table id="toDoListTable">
+                    <thead>
+                        <tr className="row">
+                            <th className="col-1">Sr</th>
+                            <td className="col-1">|</td>
+                            <th className="col-7">To Do</th>
+                            <td className="col-1">|</td>
+                            <th className="col-1">Delete</th>
+                        </tr>
+                    </thead>
+                    {existingTodoList}
+                </table>
+            </div> : <div>Loading Todos...</div>
+        )
     }
 }
 

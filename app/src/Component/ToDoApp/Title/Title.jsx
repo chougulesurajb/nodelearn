@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import $ from "jquery"
+import React from 'react';
 
 
 let Title = () => {
     return (
-        <h1>Welcome to To Do App</h1>
+        <h1>APP</h1>
     )
 }
 
