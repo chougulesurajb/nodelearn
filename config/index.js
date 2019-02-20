@@ -1,8 +1,9 @@
 'use strict';
-
 console.log('ENV:', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'production') {
+    console.log('-------============INFORMATION==========----------');
+
     module.exports = {
         "database": process.env.MONGOLAB_VAST_URI
         // "database": process.env.MONGOLAB_ROSE_URI,
@@ -28,8 +29,11 @@ if (process.env.NODE_ENV === 'production') {
         // }
     };
 } else {
-    console.log('ENV:', "not a production server see in config.js of local folder");
+    console.log('-------============INFORMATION==========----------');
+    console.log(': ENV:', "not a production server see in config.js of local folder");
     module.exports = {
+        // "database": 'mongodb://test:test123@ds143893.mlab.com:43893/todolist'
         "database": 'mongodb://localhost:27017/test'
+
     };
 }

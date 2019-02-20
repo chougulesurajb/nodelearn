@@ -1,5 +1,6 @@
 
 var _Object = require("./object.js");
+var db = require('./helpers/db');
 
 var todoCollection = db.collection('todos');
 

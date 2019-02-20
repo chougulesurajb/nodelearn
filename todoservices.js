@@ -41,7 +41,7 @@ router.use('/', function (req, res, next) {
 });
 
 router.get('/', (req, res) => {
-    res.send("this is test route")
+    res.send("This is todoservices route")
 })
 router.put('/addnewtodo', (req, res) => {
     var note = addNote(req.body);
@@ -75,13 +75,14 @@ router.get('/getalltodos', (req, res) => {
     user
         .find({}).toArrayAsync()
         .then(function (userData) {
+            console.log("userData:---------", userData)
             userData.forEach(function (user, index) {
                 // to hide current user's data in the service
                 allUsers.push(user);
             });
             // get unique carnames and structure response accordingly
             res.status(200);
-            return h.reply(res, { allUsers: allUsers });
+            return h.reply(res, allUsers);
         });
 
 

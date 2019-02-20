@@ -9,14 +9,25 @@ class ToDoApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            allTodos: ""
+            locationX: "",
+            locationY: ""
         };
     }
     componentDidMount() {
+        let that = this
+        navigator.geolocation.getCurrentPosition(function (position) {
+            that.do_something(position);
+        });
     }
+    do_something = (a) => {
+        console.log("----a", a)
+        this.setState({ locationX: a })
+    }
+
     render() {
         return (
             <div>
+                {this.state.locationX.timestamp}
                 <Title />
                 <NewToDo />
                 <ToDoList />
