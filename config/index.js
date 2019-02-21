@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
     console.log(': ENV:', "not a production server see in config.js of local folder");
     module.exports = {
         // "database": 'mongodb://test:test123@ds143893.mlab.com:43893/todolist'
-        "database": 'mongodb://localhost:27017/test'
+        "database": 'mongodb://localhost:27017/todolist'
 
     };
 }

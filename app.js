@@ -15,7 +15,7 @@ const frontEnd = require('./frontEnd');
 const app = express();
 const port = process.env.PORT || 3001
 
-app.set('view engine', 'html');
+// app.set('view engine', 'html');
 
 // app.get('/', function (req, res) {
 //     console.log("Path", path.join(__dirname + '/app/public/index.html'));

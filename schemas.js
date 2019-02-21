@@ -1,6 +1,6 @@
 'use strict';
 
-/* Schemas for all the tables from DAPP Database */
+/* Schemas for all the tables from APP Database */
 var _ = require('lodash');
 var moment = require('moment');
 

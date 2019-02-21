@@ -9,12 +9,33 @@ var h = require('./helpers');
 var _ = require('lodash');
 const path = require("path");
 
+// router.use(express.static(path.join(__dirname, 'app', 'build')));
 
-router.use('*', function (req, res, next) {
+// router.get('/', function (req, res) {
+//     res.sendFile(path.join(__dirname, 'app', 'build', 'index.html'));
+// });
+router.use(express.static(path.join(__dirname, 'app', 'build')));
 
-    console.log("Path", path.join(__dirname, 'app', 'public', 'index.html'));
-    return res.sendFile(path.join(__dirname, 'app', 'public', 'index.html'));
-});
+//production mode
+if (process.env.NODE_ENV === 'production') {
+    router.use(express.static(path.join(__dirname, 'app', 'build')));
+    //
+    router.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'app', 'build', 'index.html'));
+    })
+} else {
+    //build mode
+
+    router.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'app', 'build', 'index.html'));
+    })
+}
+
+// router.use('*', function (req, res, next) {
+
+//     console.log("Path", path.join(__dirname, 'app', 'public', 'index.html'));
+//     return res.sendFile(path.join(__dirname, 'app', 'public', 'index.html'));
+// });
 
 
 module.exports = router;
